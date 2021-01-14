@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.google.gson.*
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.leanagritest.BuildConfig
 import com.leanagritest.LeanAgriApplication
@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 private const val READ_TIMEOUT = 30L
 private const val WRITE_TIMEOUT = 30L
@@ -57,6 +58,8 @@ class AppObjectController {
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .callTimeout(CALL_TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(ApiKeyInterceptor())
+
 
             if (BuildConfig.DEBUG) {
                 val logging =
@@ -77,4 +80,16 @@ class AppObjectController {
             return INSTANCE
         }
     }
+
+    class ApiKeyInterceptor : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            var request: Request = chain.request()
+            val url: HttpUrl = request.url.newBuilder()
+                .addQueryParameter("api_key", BuildConfig.MOVIE_DB_API_KEY).build()
+            request = request.newBuilder().url(url).build()
+            return chain.proceed(request)
+        }
+    }
+
+
 }
