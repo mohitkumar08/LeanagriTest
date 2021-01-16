@@ -1,19 +1,20 @@
 package com.leanagritest.repository.server
+
 import com.google.gson.annotations.SerializedName
 
 data class MovieDetail(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerializedName("budget")
-    val budget: Int,
+    val budget: Int?,
     @SerializedName("genres")
     val genres: List<Genre>,
     @SerializedName("homepage")
     val homepage: String,
-    @SerializedName("id")
-    val id: Int,
     @SerializedName("imdb_id")
     val imdbId: String,
     @SerializedName("original_language")
@@ -25,7 +26,7 @@ data class MovieDetail(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("production_companies")
     val productionCompanies: List<ProductionCompany>,
     @SerializedName("production_countries")
@@ -50,8 +51,11 @@ data class MovieDetail(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
-
+) {
+    fun getBackgroundImage(): String {
+        return "http://image.tmdb.org/t/p/original".plus(backdropPath ?: posterPath)
+    }
+}
 
 
 data class Genre(
@@ -60,7 +64,6 @@ data class Genre(
     @SerializedName("name")
     val name: String
 )
-
 
 
 data class ProductionCompany(
