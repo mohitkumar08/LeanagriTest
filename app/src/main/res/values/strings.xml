@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LeanagriTest</string>
+    <string name="data_not_found">The movie details could not be found. </string>
 </resources>
