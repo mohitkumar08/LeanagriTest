@@ -1,12 +1,14 @@
 package com.leanagritest.repository.local.entity
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "movie_table", indices = [Index(value = ["id"])])
 data class MovieModel(
     @PrimaryKey
@@ -15,19 +17,19 @@ data class MovieModel(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
-   /* @SerializedName("genre_ids")
-    val genreIds: List<Int>,*/
+    val backdropPath: String?,
+    /* @SerializedName("genre_ids")
+     val genreIds: List<Int>,*/
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
     @SerializedName("original_title")
     val originalTitle: String,
     @SerializedName("overview")
-    val overview: String,
+    val overview: String?,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("title")
@@ -35,7 +37,13 @@ data class MovieModel(
     @SerializedName("video")
     val video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    val rating: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
+) :Parcelable{
+    fun getModifiedPath(): String {
+        return "http://image.tmdb.org/t/p/w500".plus(posterPath)
+    }
+///pUyqYjo2tTZhueBVOdkhK9NKPn6.jpg
+
+}
