@@ -4,6 +4,7 @@ enum class ApiCallStatus {
      SUCCESS, FAILED, NOT_FOUND
 }
 enum class SortBased{
+     EMPTY,
      RATING_LOW_TO__HIGH,
      RATING_HIGH_TO_LOW,
      DATE_MIN_TO_MAX,

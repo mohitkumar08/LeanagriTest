@@ -19,7 +19,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val listOfMoviesLiveData: LiveData<List<MovieModel>> = _listOfMoviesMutableLiveData
     val apiCallStatusLiveData: MutableLiveData<ApiCallStatus> = MutableLiveData()
      val clearListLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    private var sortBased: SortBased = SortBased.DATE_MAX_TO_MIN
+    private var sortBased: SortBased = SortBased.EMPTY
     private var pageNumber = 1
     private var totalPage = 1
 
@@ -28,10 +28,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         queryMap.apply {
             put("language", "en-US")
-            put("sort_by", "release_date.desc")
             put("page", "1")
-            //put("primary_release_date.gte", "2014-09-15")
-           // put("primary_release_date.lte", "2019-01-14")
         }
     }
 

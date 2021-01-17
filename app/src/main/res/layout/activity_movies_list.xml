@@ -37,6 +37,34 @@
                     android:focusable="true"
                     android:insetLeft="0dp"
                     android:insetRight="0dp"
+                    android:onClick="@{()->viewModel.getMoviesSortByDateHighToLow()}"
+                    android:text="@string/date"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/ic_high_low"
+                    app:rippleColor="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{()->viewModel.getMoviesSortByDateLowToHigh()}"
+                    android:text="@string/date"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/ic_low_to_high"
+                    app:rippleColor="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
                     android:onClick="@{()->viewModel.getMoviesPopularityByHighToLow()}"
                     android:text="@string/popularity"
                     android:textAllCaps="false"
@@ -57,33 +85,6 @@
                     app:icon="@drawable/ic_low_to_high"
                     app:rippleColor="@color/white" />
 
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:onClick="@{()->viewModel.getMoviesSortByDateHighToLow()}"
-                    android:text="@string/date"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:icon="@drawable/ic_high_low"
-                    app:rippleColor="@color/white" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.getMoviesSortByDateLowToHigh()}"
-                    android:text="@string/date"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:icon="@drawable/ic_low_to_high"
-                    app:rippleColor="@color/white" />
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"

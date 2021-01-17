@@ -6,12 +6,12 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
-        app:cardBackgroundColor="@color/black"
+        android:layout_marginVertical="@dimen/_4sdp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginVertical="@dimen/_4sdp"
-        android:paddingHorizontal="@dimen/_4sdp">
+        android:paddingHorizontal="@dimen/_4sdp"
+        app:cardBackgroundColor="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/root_view"
@@ -59,6 +59,17 @@
                 app:layout_constraintTop_toTopOf="@id/image_view"
                 tools:text="Wonder woman" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/adult_only_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_year"
+                app:srcCompat="@drawable/adult_only"
+                tools:visibility="visible" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_movie_name"
                 android:layout_width="0dp"
@@ -68,7 +79,7 @@
                 android:maxLines="2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/adult_only_iv"
                 app:layout_constraintStart_toStartOf="@id/tv_year"
                 app:layout_constraintTop_toBottomOf="@id/tv_year"
                 tools:text="Wonder woman 1984 dwd dwd" />

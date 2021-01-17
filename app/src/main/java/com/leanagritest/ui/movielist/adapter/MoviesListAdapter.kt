@@ -1,6 +1,7 @@
 package com.leanagritest.ui.movielist.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.leanagritest.R
@@ -54,6 +55,11 @@ class MoviesListAdapter(
                 imageView.setImageResource(R.drawable.img_placeholder)
                 if (moviesModel.posterPath.isNullOrEmpty().not()) {
                     imageView.setRoundImage(moviesModel.getModifiedPath())
+                }
+                if (moviesModel.adult) {
+                    adultOnlyIv.visibility = View.VISIBLE
+                } else {
+                    adultOnlyIv.visibility = View.GONE
                 }
                 root.setOnClickListener {
                     listener?.onClickMovie(moviesModel)
