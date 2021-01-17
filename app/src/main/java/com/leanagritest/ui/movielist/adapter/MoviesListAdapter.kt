@@ -2,7 +2,6 @@ package com.leanagritest.ui.movielist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.leanagritest.R
 import com.leanagritest.core.Utils.setRoundImage
@@ -29,11 +28,19 @@ class MoviesListAdapter(
     override fun getItemCount() = movieList.size
 
     fun addMovies(mNewMovieList: List<MovieModel>) {
-        val diffCallback = MoviesDiffCallback(movieList, mNewMovieList)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        movieList.clear()
+        //  val diffCallback = MoviesDiffCallback(movieList, mNewMovieList)
+        // val diffResult = DiffUtil.calculateDiff(diffCallback)
+        //  movieList.clear()
+        val oldSize = movieList.size
         movieList.addAll(mNewMovieList)
-        diffResult.dispatchUpdatesTo(this)
+        notifyItemRangeInserted(oldSize, mNewMovieList.size)
+        //     notifyDataSetChanged()
+        //     diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun clear() {
+        movieList.clear()
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val binding: MoviesListItemViewBinding) :
