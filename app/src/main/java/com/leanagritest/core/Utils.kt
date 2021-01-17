@@ -82,6 +82,9 @@ object Utils {
 
     @SuppressLint("SimpleDateFormat")
     fun String.getMovieInFormat(): String {
+        if (this.isBlank()){
+            return this
+        }
         val originalFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val targetFormat: DateFormat = SimpleDateFormat("MMMM dd, yyyy")
         val date: Date? = originalFormat.parse(this)

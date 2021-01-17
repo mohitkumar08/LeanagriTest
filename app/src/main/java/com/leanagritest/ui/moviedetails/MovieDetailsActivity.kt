@@ -51,7 +51,9 @@ class MovieDetailsActivity : AppCompatActivity() {
         viewModel.movieDetailLiveData.observe(this, {
             it?.let {
                 binding.tvMovieName.text = it.originalTitle
-                binding.image.setImage(it.getBackgroundImage())
+                it.getBackgroundImage()?.let {
+                    binding.image.setImage(it)
+                }
                 binding.tvAbout.text = it.overview
                 binding.tvDuration.text = it.runtime.getMovieTimeInPattern()
                 binding.tvReleaseDate.text = it.releaseDate.getMovieInFormat()
