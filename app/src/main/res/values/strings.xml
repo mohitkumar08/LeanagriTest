@@ -6,4 +6,8 @@
     <string name="rating">Rating</string>
     <string name="popularity">Popularity</string>
 
+
+    <string name="something_went_wrong">Oops! Something Went Wrong</string>
+    <string name="internet_not_available_msz">Seems like your Internet is too slow or not available.</string>
+
 </resources>

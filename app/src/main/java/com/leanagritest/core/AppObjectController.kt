@@ -2,6 +2,8 @@ package com.leanagritest.core
 
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -45,6 +47,10 @@ class AppObjectController {
 
         @JvmStatic
         lateinit var moviesNetworkService: MoviesNetworkService
+            private set
+
+        @JvmStatic
+        var uiHandler: Handler = Handler(Looper.getMainLooper())
             private set
 
         fun initLibrary(context: Context): AppObjectController {

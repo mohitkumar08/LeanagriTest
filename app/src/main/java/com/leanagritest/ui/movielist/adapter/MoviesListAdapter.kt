@@ -29,14 +29,14 @@ class MoviesListAdapter(
     override fun getItemCount() = movieList.size
 
     fun addMovies(mNewMovieList: List<MovieModel>) {
-        //  val diffCallback = MoviesDiffCallback(movieList, mNewMovieList)
-        // val diffResult = DiffUtil.calculateDiff(diffCallback)
-        //  movieList.clear()
         val oldSize = movieList.size
         movieList.addAll(mNewMovieList)
         notifyItemRangeInserted(oldSize, mNewMovieList.size)
-        //     notifyDataSetChanged()
-        //     diffResult.dispatchUpdatesTo(this)
+      /* val diffCallback = MoviesDiffCallback(movieList, mNewMovieList)
+          val diffResult = DiffUtil.calculateDiff(diffCallback)
+          movieList.clear()
+          notifyDataSetChanged()
+         diffResult.dispatchUpdatesTo(this)*/
     }
 
     fun clear() {
@@ -56,10 +56,10 @@ class MoviesListAdapter(
                 if (moviesModel.posterPath.isNullOrEmpty().not()) {
                     imageView.setRoundImage(moviesModel.getModifiedPath())
                 }
-                if (moviesModel.adult) {
-                    adultOnlyIv.visibility = View.VISIBLE
-                } else {
-                    adultOnlyIv.visibility = View.GONE
+                if (moviesModel.adult){
+                    adultOnlyIv.visibility= View.VISIBLE
+                }else{
+                    adultOnlyIv.visibility=View.GONE
                 }
                 root.setOnClickListener {
                     listener?.onClickMovie(moviesModel)

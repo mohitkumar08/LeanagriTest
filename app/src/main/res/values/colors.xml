@@ -10,5 +10,6 @@
     <color name="gray_48">#484848</color>
     <color name="overlay">#66000000</color>
     <color name="grey_9e">#9E9E9E</color>
+    <color name="red_color">#ef5050</color>
 
 </resources>

@@ -9,6 +9,7 @@ import com.leanagritest.ApiCallStatus
 import com.leanagritest.SortBased
 import com.leanagritest.core.AppObjectController
 import com.leanagritest.core.Utils
+import com.leanagritest.core.showAppropriateMsg
 import com.leanagritest.repository.local.entity.MovieModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private val _listOfMoviesMutableLiveData: MutableLiveData<List<MovieModel>> = MutableLiveData()
     val listOfMoviesLiveData: LiveData<List<MovieModel>> = _listOfMoviesMutableLiveData
     val apiCallStatusLiveData: MutableLiveData<ApiCallStatus> = MutableLiveData()
-     val clearListLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val clearListLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private var sortBased: SortBased = SortBased.EMPTY
     private var pageNumber = 1
     private var totalPage = 1
@@ -32,7 +33,6 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    ////URL: /discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22
     fun getMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             if (Utils.isInternetAvailable()) {
@@ -54,8 +54,8 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
                 saveInDbForOffline(responseObj.results)
                 pageNumber++
                 apiCallStatusLiveData.postValue(ApiCallStatus.SUCCESS)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
+            } catch (ex: Throwable) {
+                ex.showAppropriateMsg()
                 apiCallStatusLiveData.postValue(ApiCallStatus.FAILED)
             }
         }
@@ -75,9 +75,10 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         queryMap["page"] = pageNumber.toString()
         return queryMap
     }
-    private fun reset(){
+
+    private fun reset() {
         pageNumber = 1
-        totalPage=1
+        totalPage = 1
     }
 
     fun getMoviesSortByDateHighToLow() {
@@ -134,6 +135,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         queryMap["sort_by"] = "popularity.desc"
         getFromServer()
     }
+
     fun getMoviesPopularityByLowToHigh() {
         if (SortBased.POPULARITY_LOW_TO_HIGH == sortBased) {
             return

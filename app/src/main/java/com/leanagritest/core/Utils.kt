@@ -2,9 +2,11 @@ package com.leanagritest.core
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -82,7 +84,7 @@ object Utils {
 
     @SuppressLint("SimpleDateFormat")
     fun String.getMovieInFormat(): String {
-        if (this.isBlank()){
+        if (this.isBlank()) {
             return this
         }
         val originalFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
@@ -92,5 +94,21 @@ object Utils {
             this
         } else
             targetFormat.format(date)
+    }
+
+    fun openUrl(context: Context,url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            if (url.trim().startsWith("http://").not()) {
+                intent.data = Uri.parse("http://" + url.replace("https://", "").trim())
+            } else {
+                intent.data = Uri.parse(url.trim())
+            }
+            context.startActivity(intent)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 }

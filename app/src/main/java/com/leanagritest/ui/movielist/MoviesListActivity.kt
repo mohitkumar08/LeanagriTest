@@ -76,6 +76,7 @@ class MoviesListActivity : AppCompatActivity(), OnMoviesSelectListener {
 
     private fun addObserver() {
         viewModel.listOfMoviesLiveData.observe(this, { list ->
+            binding.progressBar.visibility = View.GONE
             list?.let {
                 moviesListAdapter.addMovies(it)
                 loading = false

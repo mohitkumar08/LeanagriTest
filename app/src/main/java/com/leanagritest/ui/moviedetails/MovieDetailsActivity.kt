@@ -3,6 +3,7 @@ package com.leanagritest.ui.moviedetails
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.leanagritest.ApiCallStatus
 import com.leanagritest.R
+import com.leanagritest.core.Utils
 import com.leanagritest.core.Utils.dpToPx
 import com.leanagritest.core.Utils.getMovieInFormat
 import com.leanagritest.core.Utils.getMovieTimeInPattern
@@ -60,6 +62,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                 binding.tvVoteCount.text = getString(R.string.votes, it.voteAverage.toString())
                 addRatingInRatingView(it.voteAverage)
                 addGenres(it.genres)
+                addMoreInfo(it.homepage)
             }
         })
         viewModel.apiCallStatusLiveData.observe(this, {
@@ -67,6 +70,15 @@ class MovieDetailsActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.data_not_found), Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun addMoreInfo(homepage: String?) {
+        if (homepage.isNullOrEmpty().not()) {
+            binding.moreInfo.visibility = View.VISIBLE
+            binding.moreInfo.setOnClickListener {
+                Utils.openUrl(applicationContext, homepage!!)
+            }
+        }
     }
 
     private fun addRatingInRatingView(voteAverage: Double) {
