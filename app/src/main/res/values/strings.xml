@@ -2,5 +2,8 @@
     <string name="app_name">LeanagriTest</string>
     <string name="data_not_found">The movie details could not be found. </string>
     <string name="votes">Votes : %s</string>
+    <string name="date">Date</string>
+    <string name="rating">Rating</string>
+    <string name="popularity">Popularity</string>
 
 </resources>
