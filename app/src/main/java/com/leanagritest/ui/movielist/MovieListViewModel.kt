@@ -14,7 +14,7 @@ import java.util.*
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application) {
     private val _listOfMoviesMutableLiveData: MutableLiveData<List<MovieModel>> = MutableLiveData()
-    val listOfMoviesMutableLiveData: LiveData<List<MovieModel>> = _listOfMoviesMutableLiveData
+    val listOfMoviesLiveData: LiveData<List<MovieModel>> = _listOfMoviesMutableLiveData
     private var pageNumber = 1
     private var totalPage = 1
 
@@ -23,12 +23,15 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         queryMap.apply {
             put("language", "en-US")
-            put("sort_by", "release_date.desc")
+      //      put("sort_by", "release_date.desc")
             put("page", "1")
+            put("primary_release_date.gte","2014-09-15")
+            put("primary_release_date.lte","2019-01-14")
+
         }
     }
 
-
+////URL: /discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22
     fun getMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             if (Utils.isInternetAvailable()) {
