@@ -52,7 +52,10 @@ data class MovieDetail(
     @SerializedName("vote_count")
     val voteCount: Int
 ) {
-    fun getBackgroundImage(): String {
+    fun getBackgroundImage(): String? {
+        if (backdropPath.isNullOrEmpty() && posterPath.isNullOrEmpty()){
+            return null
+        }
         return "http://image.tmdb.org/t/p/original".plus(backdropPath ?: posterPath)
     }
 }
