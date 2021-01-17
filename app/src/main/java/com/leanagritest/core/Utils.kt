@@ -1,5 +1,6 @@
 package com.leanagritest.core
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.net.ConnectivityManager
@@ -10,7 +11,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.leanagritest.R
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Utils {
 
@@ -33,7 +38,8 @@ object Utils {
             return nwInfo.isConnected
         }
     }
-    private fun dpToPx(dp: Int): Int {
+
+    fun dpToPx(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 
@@ -45,10 +51,43 @@ object Utils {
         val multi = MultiTransformation(RoundedCornersTransformation(dpToPx(8), 0))
         Glide.with(context)
             .load(url)
+            .apply(
+                RequestOptions().placeholder(R.drawable.img_placeholder)
+                    .error(R.drawable.img_placeholder)
+            )
             .override(Target.SIZE_ORIGINAL)
             .apply(RequestOptions.bitmapTransform(multi))
             .into(this)
     }
 
+    fun ImageView.setImage(
+        url: String,
+        context: Context = AppObjectController.joshApplication
+    ) {
+        Glide.with(context)
+            .load(url)
+            .apply(
+                RequestOptions().placeholder(R.drawable.img_placeholder)
+                    .error(R.drawable.img_placeholder)
+            )
+            .override(Target.SIZE_ORIGINAL)
+            .into(this)
+    }
 
+    fun Int.getMovieTimeInPattern(): String {
+        val hours: Int = this / 60 //since both are ints, you get an int
+        val minutes: Int = this % 60
+        return String.format("%d:%02d", hours, minutes)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun String.getMovieInFormat(): String {
+        val originalFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val targetFormat: DateFormat = SimpleDateFormat("MMMM dd, yyyy")
+        val date: Date? = originalFormat.parse(this)
+        return if (date == null) {
+            this
+        } else
+            targetFormat.format(date)
+    }
 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.leanagritest.R
 import com.leanagritest.core.Utils.setRoundImage
 import com.leanagritest.databinding.MoviesListItemViewBinding
 import com.leanagritest.repository.local.entity.MovieModel
@@ -43,6 +44,7 @@ class MoviesListAdapter(
                 tvMovieName.text = moviesModel.originalTitle
                 tvRating.text = moviesModel.rating.toString()
                 tvYear.text = moviesModel.releaseDate.split("-")[0]
+                imageView.setImageResource(R.drawable.img_placeholder)
                 if (moviesModel.posterPath.isNullOrEmpty().not()) {
                     imageView.setRoundImage(moviesModel.getModifiedPath())
                 }
